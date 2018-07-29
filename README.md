@@ -1,2 +1,2 @@
 # camelq
-New quant system.
+New quant system by CamelQ.
