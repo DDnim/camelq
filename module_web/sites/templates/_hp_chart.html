@@ -1,0 +1,246 @@
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('chart'));
+
+    option = {
+        title: {
+            text: 'Syetem Design By CamelQ'
+        },
+        tooltip: {},
+        animationDurationUpdate: 1500,
+        animationEasingUpdate: 'quinticInOut',
+        series : [
+            {
+                type: 'graph',
+                layout: 'none',
+                symbolSize: 80,
+                
+                roam: true,
+                label: {
+                    normal: {
+                        show: true
+                    }
+                },
+                edgeSymbol: ['circle', 'arrow'],
+                edgeSymbolSize: [4, 4],
+                edgeLabel: {
+                    normal: {
+                        textStyle: {
+                            fontSize: 20
+                        }
+                    }
+                },
+
+                data: [{
+                    name: 'module_web',
+                    x: 100,
+                    y: 100
+                },{
+                    name: 'web_market',
+                    x: 170,
+                    y: 50
+                },{
+                    name: 'web_quant',
+                    x: 170,
+                    y: 100
+                },{
+                    name: 'web_bot',
+                    x: 170,
+                    y: 150
+                }, {
+                    name: 'module_quant',
+                    x: 100,
+                    y: 200,
+                    description: 'Research indicator with mathematical and statistical methods.'
+                }, {
+                    name: 'module_bot',
+                    x: 100,
+                    y: 300,
+                    description: 'Automatic trade bot.'
+                }, {
+                    name: 'module_jade',
+                    x: 100,
+                    y: 400,
+                    description: 'Auto data downloader/crawler with resume from break-point.'
+                }, {
+                    name: 'server_data',
+                    x: 300,
+                    y: 150
+                }, {
+                    name: 'server_result',
+                    x: 300,
+                    y: 250
+                }, {
+                    name: 'server_trade',
+                    x: 300,
+                    y: 350
+                }, {
+                    name: 'db_data',
+                    x: 400,
+                    y: 150
+                }, {
+                    name: 'db_result',
+                    x: 400,
+                    y: 250
+                }, {
+                    name: 'Postgresql',
+                    x: 500,
+                    y: 200
+                },{
+                    name: 'fund_market_api',
+                    x: 500,
+                    y: 350
+                },{
+                    name: 'docker__web',
+                    x: 150,
+                    y: 90,
+                    symbol:'star',
+                    symbolSize:300,
+                    itemStyle:
+                    {normal: 
+                        {
+                            color:'rgba(128, 128, 128, 0.1)',
+                            borderColor:'blue',
+                            label:
+                            {
+                                textStyle:
+                                {
+                                    color:'red'
+                                }
+                            }
+                        }
+                    },
+                    description: 'centOS + docker + nginx + uwsgi + Django.'
+                },{
+                    name: 'docker_web',
+                    x: 90,
+                    y: 30,
+                    symbol:'star',
+                    symbolSize:100,
+                    itemStyle:
+                    {normal: 
+                        {
+                            color:'blue',
+                            borderColor:'blue',
+                            label:
+                            {
+                                textStyle:
+                                {
+                                    color:'red'
+                                }
+                            }
+                        }
+                    }
+                },{
+                    name: '  ',
+                    x: 500,
+                    y: 190,
+                    symbol:'star',
+                    symbolSize:150,
+                    itemStyle:
+                    {normal:
+                        {
+                            color:'rgba(128, 128, 128, 0.1)',
+                            borderColor:'blue',
+                        }
+                    }
+                },{
+                    name: 'docker_db',
+                    x: 473,
+                    y: 163,
+                    symbol:'star',
+                    symbolSize:60,
+                    itemStyle:
+                    {normal:
+                        {
+                            color:'blue',
+                            borderColor:'blue'
+                        }
+                    }
+                }],
+                // links: [],
+                links: [
+                {
+                    source: 'server_data',
+                    target: 'module_quant',
+                    lineStyle: {
+                        normal: { curveness: 0.2 }
+                    }
+                },{
+                    source: 'module_quant',
+                    target: 'server_result',
+                    lineStyle: {
+                        normal: { curveness: 0.2 }
+                    }
+                }, {
+                    source: 'module_jade',
+                    target: 'server_data'
+                },{
+                    source: 'module_bot',
+                    target: 'server_trade'
+                },{
+                    source: 'server_trade',
+                    target: 'module_jade'
+                }, {
+                    source: 'server_data',
+                    target: 'module_bot'
+                },{
+                    source: 'server_data',
+                    target: 'db_data'
+                },{
+                    source: 'db_data',
+                    target: 'server_data'
+                },{
+                    source: 'server_result',
+                    target: 'db_result'
+                },{
+                    source: 'db_result',
+                    target: 'server_result'
+                }, {
+                    source: 'module_web',
+                    target: 'web_market'
+                }, {
+                    source: 'server_data',
+                    target: 'web_market'
+                }, {
+                    source: 'module_web',
+                    target: 'web_quant'
+                },{
+                    source: 'server_result',
+                    target: 'web_quant'
+                }, {
+                    source: 'module_web',
+                    target: 'web_bot'
+                },{
+                    source: 'server_result',
+                    target: 'web_bot'
+                },{
+                    source: 'server_data',
+                    target: 'web_quant'
+                },{
+                    source: 'server_trade',
+                    target: 'fund_market_api'
+                },{
+                    source: 'db_data',
+                    target: 'Postgresql'
+                },{
+                    source: 'db_result',
+                    target: 'Postgresql'
+                }],
+                lineStyle: {
+                    normal: {
+                        opacity: 0.9,
+                        width: 2,
+                        curveness: 0
+                    }
+                },
+                tooltip: {
+                    formatter: function (param) {
+                        return param.name + '<br>' + param.data['description'];
+                    }
+                }
+            }
+        ]
+    };
+    myChart.setOption(option);
+</script>

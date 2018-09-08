@@ -6,11 +6,11 @@ def get_logger(name):
     fmt = lg.Formatter("%(asctime)s[%(levelname)s][%(name)s]:%(message)s")
     logger.setLevel(lg.DEBUG)
 
-    file_handler = lg.FileHandler('./log/' + name, 'a')
+    file_handler = lg.FileHandler('./log/' + name + '.log', 'a')
     file_handler.setLevel(lg.INFO)
     file_handler.setFormatter(fmt)
 
-    file_handler_debug = lg.FileHandler('./log/' + name + '_debug', 'a')
+    file_handler_debug = lg.FileHandler('./log/' + name + '_debug.log', 'a')
     file_handler_debug.setLevel(lg.DEBUG)
     file_handler_debug.setFormatter(fmt)
 

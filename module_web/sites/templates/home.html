@@ -1,0 +1,16 @@
+<html>
+    <head>
+    {% include "_head.html" %}
+    {% load static %}
+    <script src="{% static '/js/echarts.min.js' %}"></script>
+    </head>
+    <body>
+        <div class="container">
+            {% include "_navibar.html" %}
+            <div id="chart" style="height:750px;"></div>
+            {% include "_hp_chart.html" %}
+            <h1>Building</h1>
+        </div>
+    </body>
+
+</html>
