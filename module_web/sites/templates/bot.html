@@ -1,0 +1,51 @@
+<html>
+    <head>
+    {% include "_head.html" %}
+    {% load staticfiles %}
+    <script src="{% static '/js/echarts.min.js' %}"></script>
+    <script language="JavaScript">
+        setTimeout(function(){location.reload()},5000); //指定1秒刷新一次
+    </script>
+    </head>
+    <body onload="load('nav_bot')">
+        <div class="container">
+            {% include "_navibar.html" %}
+            <h1>Building</h1>
+            <div style="overflow:scroll;">
+                <table class="table table-striped">
+                <th>
+                    <td>Upper</td>
+                    <td>Ltp - MA10</td>
+                    <td>MA10 - MA40</td>
+                    <td>Ltp - MA40</td>
+                    <td>Bottomer</td>
+                </th>
+                {% for k,v in datas.items %}
+                <tr class='show_in_chart'>
+                    <td>{{ k }}</td>
+                    {% for kk,vv in v.items %}
+                    <td>
+                        {{ vv.diffrence | floatformat:4}}
+                    </td>
+                    {% endfor %}
+                </tr>
+                <tr class='show_in_chart'>
+                    <td>Percent</td>
+                    {% for kk,vv in v.items %}
+                        {% if vv.percentage < 1 and vv.percentage >= 0 %}
+                    <td style = "background-color: rgb(255,0,0)">    
+                        {% elif vv.percentage < 0 and vv.percentage > -1 %}
+                    <td style = "background-color: rgb(0,255,0)">
+                        {% else %}
+                    <td>
+                        {% endif %}
+                        {{ vv.percentage | floatformat:4}}
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
